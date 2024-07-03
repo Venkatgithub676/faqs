@@ -1,0 +1,33 @@
+/* Write your code here. */
+.li-con {
+  border: 2px solid #e4e7eb;
+  margin-bottom: 15px;
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+}
+.heading-con {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.heading {
+  font-family: 'Roboto';
+  font-size: 25px;
+  color: #52606d;
+}
+
+.img-btn {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.hr-line {
+  border: 1px solid #d7dae6;
+}
+.answer {
+  font-family: 'Roboto';
+  font-size: 15px;
+  color: #9aa5b1;
+}
