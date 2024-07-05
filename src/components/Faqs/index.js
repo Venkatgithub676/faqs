@@ -4,17 +4,16 @@ import FaqItem from '../FaqItem'
 import './index.css'
 
 class Faqs extends Component {
-  state = {faqsLists: []}
-
-  componentDidMount() {
-    const {faqsList} = this.props
+  constructor(props) {
+    super(props)
+    const {faqsList} = props
     const res = faqsList.map(each => ({...each, isClicked: false}))
-    this.setState({faqsLists: res})
+    this.state = {faqsList: res}
   }
 
   clickBtn = id => {
-    const {faqsLists} = this.state
-    const filteredFaq = faqsLists.map(each => {
+    const {faqsList} = this.state
+    const filteredFaq = faqsList.map(each => {
       if (each.id === id) {
         return {...each, isClicked: !each.isClicked}
       }
@@ -22,21 +21,20 @@ class Faqs extends Component {
     })
     // console.log(filteredFaq)
 
-    this.setState({faqsLists: filteredFaq})
+    this.setState({faqsList: filteredFaq})
   }
 
   render() {
-    const {faqsList} = this.props
-    const {faqsLists} = this.state
+    const {faqsList} = this.state
     // console.log(btnStatus)
-    const res = faqsLists.length === 0 ? faqsList : faqsLists
+
     // console.log(faqsLists)
     return (
       <div className="bg-con">
         <div className="main-con">
           <h1 className="faq-heading">FAQs</h1>
           <ul className="ul-con">
-            {res.map(each => (
+            {faqsList.map(each => (
               <FaqItem each={each} key={each.id} clickBtn={this.clickBtn} />
             ))}
           </ul>
