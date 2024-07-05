@@ -4,31 +4,39 @@ import FaqItem from '../FaqItem'
 import './index.css'
 
 class Faqs extends Component {
-  state = {btnStatus: [{btn: false}, {btn: false}, {btn: false}, {btn: false}]}
+  state = {faqsLists: []}
+
+  componentDidMount() {
+    const {faqsList} = this.props
+    const res = faqsList.map(each => ({...each, isClicked: false}))
+    this.setState({faqsLists: res})
+  }
 
   clickBtn = id => {
-    const {btnStatus} = this.state
-    const filteredBtn = btnStatus.filter()
-    this.setState(prevState => ({
-      btnStatus: !prevState.btnStatus.map(each =>
-        prevState.btnStatus.indexOf(each) === id
-          ? {btn: !each.btn}
-          : {btn: each.btn},
-      ),
-    }))
+    const {faqsLists} = this.state
+    const filteredFaq = faqsLists.map(each => {
+      if (each.id === id) {
+        return {...each, isClicked: !each.isClicked}
+      }
+      return each
+    })
+    // console.log(filteredFaq)
+
+    this.setState({faqsLists: filteredFaq})
   }
 
   render() {
     const {faqsList} = this.props
-    const {btnStatus} = this.state
-    console.log(btnStatus)
-    // console.log(faqsList)
+    const {faqsLists} = this.state
+    // console.log(btnStatus)
+    const res = faqsLists.length === 0 ? faqsList : faqsLists
+    // console.log(faqsLists)
     return (
       <div className="bg-con">
         <div className="main-con">
           <h1 className="faq-heading">FAQs</h1>
           <ul className="ul-con">
-            {faqsList.map(each => (
+            {res.map(each => (
               <FaqItem each={each} key={each.id} clickBtn={this.clickBtn} />
             ))}
           </ul>
